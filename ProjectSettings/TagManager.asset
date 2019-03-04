@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - wall
+  - pit
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,12 +22,12 @@ TagManager:
   - Pit
   - HeavyProjectile
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Exit
+  - Tower
+  - Projectile
+  - WallTower
+  - FloorTower
+  - TowerSelection
   - 
   - 
   - 
@@ -39,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: SubDefault
+    uniqueID: 1889478771
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3552163569
     locked: 0

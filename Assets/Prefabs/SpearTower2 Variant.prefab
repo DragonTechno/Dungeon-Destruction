@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2925730508674844384
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8072912122122654993, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_Name
+      value: SpearTower2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 50.75185
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.969337
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.025113469
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287897514128648560, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019085222892019106, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019085222892019106, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.025012754
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019085222892019106, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119919689242103579, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: chargeCap
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119919689242103579, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: chargeRate
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119919689242103579, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3679764678671199705, guid: 145c6d422ac4d8d479b33ebd9364f592,
+        type: 3}
+    - target: {fileID: 6119919689242103579, guid: ca63c5f3a0a03f645be5c52fbd78d252,
+        type: 3}
+      propertyPath: velocity
+      value: 60
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca63c5f3a0a03f645be5c52fbd78d252, type: 3}
