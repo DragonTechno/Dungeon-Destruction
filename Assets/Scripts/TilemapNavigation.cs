@@ -252,14 +252,6 @@ public class TilemapNavigation : MonoBehaviour
 		}
 	}
 
-	/**
-	* blink to target position
-	*/ 
-	void BlinkMovePlayer ()
-	{
-		player.position = new Vector3 (pathNodes [pathNodes.Count - 1].pos.x + 0.5f, pathNodes [pathNodes.Count - 1].pos.y + 0.5f, 0);
-	}
-
     public void StartFindingPath(Vector2 s, Vector2 e, Action<List<NodeItem>> callback)
     {
         StartCoroutine(FindingPath(s,e,callback));
@@ -270,7 +262,7 @@ public class TilemapNavigation : MonoBehaviour
 	*/
     public IEnumerator FindingPath (Vector2 s, Vector2 e, Action<List<NodeItem>> callback)
 	{
-		NodeItem startNode = getItem (s);
+        NodeItem startNode = getItem (s);
 		NodeItem endNode = getItem (e);
 
         if (!endNode.isWall)
@@ -347,7 +339,7 @@ public class TilemapNavigation : MonoBehaviour
 	*/
 	List<NodeItem> generatePath (NodeItem startNode, NodeItem endNode)
 	{
-		List<NodeItem> path = new List<NodeItem> ();
+        List<NodeItem> path = new List<NodeItem> ();
         if (!(endNode == null))
         {
             if (savePaths && calculatedPaths.ContainsKey(((startNode.x, startNode.y), (endNode.x, endNode.y))))
@@ -389,6 +381,7 @@ public class TilemapNavigation : MonoBehaviour
             }
             directionOld = directionNew;
         }
+        newPath.Add(path[path.Count - 1]);
         return newPath;
     }
 

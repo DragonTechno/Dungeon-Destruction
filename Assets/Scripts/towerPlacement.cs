@@ -7,8 +7,10 @@ public class towerPlacement : MonoBehaviour
 {
     public GameObject[] placementObject;
     public int money = 0;
+    public int lives;
     public float sellRatio = .6f;
     public Text moneyText;
+    public Text livesText;
     GameObject activeObject;
     placeRequirements activeRequirements;
     int menuIndex;
@@ -20,17 +22,24 @@ public class towerPlacement : MonoBehaviour
         menuOpen = false;
         menuIndex = 0;
         moneyText.text = money.ToString();
+        livesText.text = lives.ToString();
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
+        if (lives <= 0)
+        {
+            print("Game Over!");
+        }
+
         if (menuOpen)
         {
             Vector2 world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            activeObject.transform.position = new Vector2(Mathf.RoundToInt(world.x+.5f)-.5f, Mathf.RoundToInt(world.y +.5f) - .5f);
-            if (activeRequirements.cost <= money && (Input.GetMouseButtonUp(0) || (Input.GetMouseButton(0) && 
-                (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftControl))) )&& 
+            Vector2 snappedPosition = new Vector2(Mathf.RoundToInt(world.x + .5f) - .5f, Mathf.RoundToInt(world.y + .5f) - .5f);
+            activeObject.transform.position = snappedPosition;
+            if (activeRequirements.cost <= money && 
+                (Input.GetMouseButtonUp(0) || (Input.GetMouseButton(0) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftControl)))) && 
                 activeRequirements.RequirementsMet())
             {
                 money -= activeRequirements.cost;
@@ -45,7 +54,7 @@ public class towerPlacement : MonoBehaviour
                 menuIndex = (menuIndex + 1) % placementObject.Length;
                 string direction = activeRequirements.direction;
                 Destroy(activeObject);
-                activeObject = Instantiate(placementObject[menuIndex], new Vector2(Mathf.RoundToInt(world.x + .5f) - .5f, Mathf.RoundToInt(world.y + .5f) - .5f), Quaternion.identity);
+                activeObject = Instantiate(placementObject[menuIndex], snappedPosition, Quaternion.identity);
                 activeRequirements = activeObject.GetComponent<placeRequirements>();
                 while (activeRequirements.direction != direction)
                 {
@@ -53,6 +62,7 @@ public class towerPlacement : MonoBehaviour
                 }
             }
         }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if(menuOpen)
@@ -69,6 +79,7 @@ public class towerPlacement : MonoBehaviour
                 activeObject.transform.position = new Vector2(Mathf.RoundToInt(world.x + .5f) - .5f, Mathf.RoundToInt(world.y + .5f) - .5f);
             }
         }
+
         //if (Input.GetMouseButtonDown(1) && (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)))
         //{
         //    Vector2 world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -92,6 +103,8 @@ public class towerPlacement : MonoBehaviour
         //        }
         //    }
         //}
+
         moneyText.text = money.ToString();
+        livesText.text = lives.ToString();
     }
 }

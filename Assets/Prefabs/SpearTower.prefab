@@ -588,7 +588,7 @@ MonoBehaviour:
     type: 3}
   width: 0
   height: 0
-  velocity: 40
+  velocity: 75
   angle: 0
   direction: down
   chargeCap: 30

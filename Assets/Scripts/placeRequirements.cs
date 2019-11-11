@@ -8,7 +8,7 @@ public class placeRequirements : MonoBehaviour
     public GameObject tower;
     public int cost;
     public bool directional;
-    internal string direction = "down";
+    public string direction = "down";
 
     // Start is called before the first frame update
     void Start()
@@ -84,13 +84,21 @@ public class placeRequirements : MonoBehaviour
         }
         if(directional)
         {
-            if (rotateDir == "clockwise")
+            if(direction == "down")
             {
-                transform.Rotate(Vector3.forward * -90);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x,transform.eulerAngles.y,0f);
             }
-            else
+            else if(direction == "left")
             {
-                transform.Rotate(Vector3.forward * 90);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, -90f);
+            }
+            else if (direction == "up")
+            {
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 180f);
+            }
+            else if (direction == "right")
+            {
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 90f);
             }
         }
     }
@@ -99,34 +107,76 @@ public class placeRequirements : MonoBehaviour
     {
         bool requirements = true;
 
-        RaycastHit2D[] hit = new RaycastHit2D[2];
+        RaycastHit2D[] hits = new RaycastHit2D[2];
+
         ContactFilter2D triggerCheck = new ContactFilter2D();
         triggerCheck.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         triggerCheck.useTriggers = true;
-        Physics2D.Raycast(transform.position, Vector2.zero, triggerCheck, hit);
+
+        Physics2D.Raycast(transform.position, Vector2.zero, triggerCheck, hits);
 
         //If something was hit, the RaycastHit2D.collider will not be null.
-        if (hit[1])
+        foreach (RaycastHit2D hit in hits)
         {
-            requirements = false;
+            if (hit)
+            {
+                if (hit.transform.gameObject != gameObject)
+                {
+                    requirements = false;
+                }
+            }
         }
+
         if (directional)
         {
             ContactFilter2D overlapFilter = new ContactFilter2D();
-            Collider2D[] singleOverlap = new Collider2D[1];
+            RaycastHit2D[] overlaps = new RaycastHit2D[3];
+
             overlapFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(directionalCollider.gameObject.layer));
-            directionalCollider.OverlapCollider(overlapFilter, singleOverlap);
-            if (singleOverlap[0])
+            overlapFilter.useTriggers = true;
+
+            Vector3 offset = Vector3.zero;
+
+            if (direction == "down")
             {
-                print("Collision with directional collider");
-                requirements = false;
+                offset = Vector3.down;
+            }
+            else if(direction == "up")
+            {
+                offset = Vector3.up;
+            }
+            else if (direction == "left")
+            {
+                offset = Vector3.left;
+            }
+            else if (direction == "right")
+            {
+                offset = Vector3.right;
+            }
+
+            Physics2D.Raycast(transform.position + offset, Vector2.zero, overlapFilter, overlaps);
+
+            //If something was hit, the RaycastHit2D.collider will not be null.
+            foreach (RaycastHit2D overlap in overlaps)
+            {
+                if (overlap && overlap.transform.gameObject != directionalCollider.gameObject)
+                {
+                    requirements = false;
+                    print(overlap.transform.name);
+                }
+                else if(overlap)
+                {
+                    print(overlap.transform.name);
+                }
             }
         }
+
         return requirements;
     }
 
     public void InstantiateTower(Vector2 position)
     {
+        transform.position = position;
         if (RequirementsMet())
         {
             GameObject newTower = Instantiate(tower, position, Quaternion.identity);

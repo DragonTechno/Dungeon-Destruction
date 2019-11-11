@@ -38,10 +38,6 @@ public class projectileHalt : MonoBehaviour
             if (rb.velocity.magnitude > initialVelocity/speedRatio)
             {
                 enemy.changeHealth(-damage);
-                if (oneHit)
-                {
-                    Physics2D.IgnoreCollision(collision.otherCollider, GetComponent<Collider2D>());
-                }
             }
             if (destroyOnContact)
             {
@@ -57,15 +53,11 @@ public class projectileHalt : MonoBehaviour
         {
             if (rb.velocity.magnitude > initialVelocity / 3)
             {
-                //print("Hit enemy");
+                print("Hit enemy");
                 enemy.changeHealth(-damage);
-                if (oneHit)
-                {
-                    Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
-                }
                 Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
                 float massRatio = 1f / enemyRb.mass;
-                print(massRatio);
+                //print(massRatio);
                 enemyRb.AddForce(rb.velocity.normalized * piercingCoefficient * massRatio,ForceMode2D.Impulse);
                 rb.AddForce(-rb.velocity.normalized * piercingCoefficient * massRatio, ForceMode2D.Impulse);
             }
@@ -78,46 +70,44 @@ public class projectileHalt : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        enemyStats enemy = collision.collider.gameObject.GetComponent<enemyStats>();
-        if (enemy)
+        if (!oneHit)
         {
-            if (rb.velocity.magnitude > initialVelocity / 3)
+            enemyStats enemy = collision.collider.gameObject.GetComponent<enemyStats>();
+            if (enemy)
             {
-                enemy.changeHealth(-damage);
-                if (oneHit)
+                if (rb.velocity.magnitude > initialVelocity / 3)
                 {
-                    Physics2D.IgnoreCollision(collision.otherCollider, GetComponent<Collider2D>());
+                    enemy.changeHealth(-damage);
                 }
-            }
-            if (destroyOnContact)
-            {
-                Destroy(gameObject);
+                if (destroyOnContact)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        enemyStats enemy = collision.gameObject.GetComponent<enemyStats>();
-        if (enemy)
+        if (!oneHit)
         {
-            if (rb.velocity.magnitude > initialVelocity / 3)
+            enemyStats enemy = collision.gameObject.GetComponent<enemyStats>();
+            if (enemy)
             {
-                //print("Hit enemy");
-                enemy.changeHealth(-damage);
-                if (oneHit)
+                if (rb.velocity.magnitude > initialVelocity / 3)
                 {
-                    Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
+                    print("Hit enemy");
+                    enemy.changeHealth(-damage);
+                    Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+                    float massRatio = 1f / enemyRb.mass;
+                    print(massRatio);
+                    enemyRb.AddForce(rb.velocity.normalized * piercingCoefficient * massRatio, ForceMode2D.Impulse);
+                    rb.AddForce(-rb.velocity.normalized * piercingCoefficient * massRatio, ForceMode2D.Impulse);
                 }
-                Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
-                float massRatio = 1f / enemyRb.mass;
-                print(massRatio);
-                enemyRb.AddForce(rb.velocity.normalized * piercingCoefficient * massRatio);
-                rb.AddForce(-rb.velocity.normalized * piercingCoefficient * massRatio);
-            }
-            if (destroyOnContact)
-            {
-                Destroy(gameObject);
+                if (destroyOnContact)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

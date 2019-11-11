@@ -121,7 +121,7 @@ public class AgentScript : MonoBehaviour
                     // the math part of this line makes sure that enemies goes faster when they're further away and is capped
                     rb.AddForce(transform.right * walkForce);
                     //print(GetComponent<Rigidbody2D>().velocity);
-                    if (Vector2.Distance(pathNodes[i].pos + new Vector2(0.5f, 0.5f), new Vector2(transform.position.x, transform.position.y)) < waypointDis)
+                    if (i != max-1 && Vector2.Distance(pathNodes[i].pos + new Vector2(0.5f, 0.5f), new Vector2(transform.position.x, transform.position.y)) < waypointDis)
                     {
                         isOver = true;
                     }
